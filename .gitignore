@@ -1,5 +1,4 @@
 # Various IDEs and Editors
-.vscode/
 .idea/
 **/*~
 
@@ -16,3 +15,7 @@ src/declarations/
 # frontend code
 node_modules/
 dist/
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
+branch_structure.json
