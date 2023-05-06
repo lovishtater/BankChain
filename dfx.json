@@ -1,0 +1,35 @@
+{
+  "canisters": {
+    "BankChain_backend": {
+      "main": "src/BankChain_backend/main.mo",
+      "type": "motoko"
+    },
+    "BankChain_frontend": {
+      "dependencies": [
+        "BankChain_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/BankChain_frontend/src/index.html"
+      },
+      "source": [
+        "src/BankChain_frontend/assets",
+        "dist/BankChain_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "dfx": "0.11.1",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    }
+  },
+  "version": 1
+}
