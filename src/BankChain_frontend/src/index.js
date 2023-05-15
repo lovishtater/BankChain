@@ -1,19 +1,20 @@
-import { BankChain_backend } from "../../declarations/BankChain_backend";
+import {BankChain_backend} from '../../declarations/BankChain_backend';
 
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const button = e.target.querySelector("button");
+async function getBalance(){
+  const currentBalance = await BankChain_backend.checkBalance();
+  document.getElementById("value").innerText = currentBalance.toFixed(2);
+} 
 
-  const name = document.getElementById("name").value.toString();
+window.addEventListener("load", getBalance());
 
-  button.setAttribute("disabled", true);
-
-  // Interact with foo actor, calling the greet method
-  const greeting = await BankChain_backend.greet(name);
-
-  button.removeAttribute("disabled");
-
-  document.getElementById("greeting").innerText = greeting;
-
-  return false;
-});
+document.querySelector("form").addEventListener("submit", async function (event){
+event.preventDefault();
+const button = event.target.querySelector("#submit-btn");
+button.setAttribute("disabled", true);
+const inputAmount = parseFloat(document.getElementById("input-amount").value);
+const withdrawalAmount = parseFloat(document.getElementById("withdrawal-amount").value);
+inputAmount && await BankChain_backend.topUp(inputAmount)
+withdrawalAmount && await BankChain_backend.withdraw(withdrawalAmount)
+getBalance()
+button.removeAttribute("disabled");
+})
